@@ -1,38 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../header/maze.h"
+#include "../headers/maze.h"
 
-void init_menu()
-{
-    char c;
-    system(CLEAN);
-    printf("Bienvenue dans le jeu du labyrinthe ! \nVeuillez sélectionner une action à effectuer : \n\n");
-    printf("1 - Créer un labyrinthe\n");
-    printf("2 - Charger un labyrinthe\n");
-    printf("3 - Jouer\n");
-    printf("4 - Quitter\n");
-    scanf("%c",&c);
-    //printf("%c",c);
-    switch(c)
-    {
-    case '1' :
-        printf("Création de labyrinthe ...\n");
-        break;
-    case '2' :
-        printf("Chargement de labyrinthe ...\n");
-        break;
-    case '3' :
-        printf("Jeu ...\n");
-        break;
-    case '4' :
-        printf("Sortie ...\n");;
-        break;
-    default :
-        printf("Aucune action valide sélectionnée...\n");
-        break;
-    }
-}
 Maze init_maze(int height, int width)
 {
     Maze m;
@@ -129,11 +99,24 @@ void fill_maze(Maze *m)
 
 void view_maze(Maze m)
 {
+
     view_tab(m.mat_v,m.height,m.width);
     printf("\n");
     view_tab(m.mat_h,m.height,m.width);
     printf("\n");
-    view_tab(m.mat_m,m.height,m.width);
+    /*view_tab(m.mat_m,m.height,m.width);*/
+
+    int lin,col;
+    for (lin=0; lin < m.height; lin++)
+    {
+        for (col=0; col < m.width; col++){
+                if(m.mat_v[lin][col] == 1) printf("l");
+                else if(m.mat_v[lin][col] == 0) printf(" ");
+                if(m.mat_h[lin][col] == 1) printf("_");
+                else if(m.mat_h[lin][col] == 0) printf(" ");
+        }
+        printf("\n");
+    }
 
 }
 
