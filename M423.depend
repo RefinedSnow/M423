@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1447250599 source:d:\jennifer\cours\introprog\m423\main.c
+	<stdio.h>
+	<stdbool.h>
+	<stdlib.h>
+	"header/maze.h"
+
+1447253135 source:d:\jennifer\cours\introprog\m423\sources\maze.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"../header/maze.h"
+
+1447251078 d:\jennifer\cours\introprog\m423\header\maze.h
+

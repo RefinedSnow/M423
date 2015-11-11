@@ -1,0 +1,152 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "../header/maze.h"
+
+void init_menu()
+{
+    char c;
+    system(CLEAN);
+    printf("Bienvenue dans le jeu du labyrinthe ! \nVeuillez sélectionner une action à effectuer : \n\n");
+    printf("1 - Créer un labyrinthe\n");
+    printf("2 - Charger un labyrinthe\n");
+    printf("3 - Jouer\n");
+    printf("4 - Quitter\n");
+    scanf("%c",&c);
+    //printf("%c",c);
+    switch(c)
+    {
+    case '1' :
+        printf("Création de labyrinthe ...\n");
+        break;
+    case '2' :
+        printf("Chargement de labyrinthe ...\n");
+        break;
+    case '3' :
+        printf("Jeu ...\n");
+        break;
+    case '4' :
+        printf("Sortie ...\n");;
+        break;
+    default :
+        printf("Aucune action valide sélectionnée...\n");
+        break;
+    }
+}
+Maze init_maze(int height, int width)
+{
+    Maze m;
+    Player p;
+    int lin;
+    m.mat_v = calloc(height,sizeof(int*));
+    m.mat_h = calloc(height,sizeof(int*));
+    m.mat_m = calloc(height,sizeof(int*));
+    for (lin=0; lin < height; lin++)
+    {
+        m.mat_v[lin] = calloc(width,sizeof(int));
+        m.mat_h[lin] = calloc(width,sizeof(int));
+        m.mat_m[lin] = calloc(width,sizeof(int));
+    }
+    if(m.mat_v ==NULL  || m.mat_h == NULL || m.mat_m == NULL)
+    {
+        exit(1);
+    }
+    m.height = height;
+    m.width = width;
+    p.posx=0;
+    p.posy=0;
+    m.player = p;
+
+    return m;
+}
+void create_maze(char *name, Maze *m)
+{
+    m->name = name;
+}
+
+void fill_maze(Maze *m)
+{
+    /*
+    À chaque itération, on choisit un mur à ouvrir de manière aléatoire.
+
+Lorsqu'un mur est ouvert entre deux cellules adjacentes, les deux cellules sont liées entre elles et forment un chemin.
+
+À chaque fois que l'on tente d'ouvrir un mur entre deux cellules, on vérifie que ces deux cellules ont des identifiants différents.
+
+Si les identifiants sont identiques, c'est que les deux cellules sont déjà reliées et appartiennent donc au même chemin. On ne peut donc pas ouvrir le mur.*/
+    int cell_val,old_cell;
+    do{
+        //Choses which wall to open
+        int cell_x_rng = rand()%(m->width);
+        int cell_y_rng = rand()%(m->height);
+        int wall_type_rng = rand()%2;
+        if(cell_x_rng < m->width && cell_y_rng < m->height){
+            if(wall_type_rng == WALL_VERTICAL){
+                //the value to apply to other cells
+                cell_val = m->mat_m[cell_y_rng][cell_x_rng];
+                //the current value of the path we're about to open
+                old_cell = m->mat_m[cell_y_rng+1][cell_x_rng];
+                //already opened, go next
+                if(m->mat_v[cell_y_rng][cell_x_rng] == 0) continue;
+                //opens the wall
+                m->mat_v[cell_y_rng+1][cell_x_rng] = 0;
+                if(old_cell==cell_val) continue;
+                m->mat_m[cell_y_rng+1][cell_x_rng] = cell_val;
+                //lorsqu'on ouvre le mur on doit modifier toutes les valeurs de l'autre coté pour correspondre
+
+            }
+            else{
+
+            }
+    }
+
+    }while(!check_array(m->mat_m,m->width,m->height))
+}
+
+void view_maze(Maze m)
+{
+    /*view_tab(m.mat_v,m.height,m.width);
+    printf("\n");
+    view_tab(m.mat_h,m.height,m.width);
+    printf("\n");
+    view_tab(m.mat_m,m.height,m.width);*/
+
+}
+
+void view_tab(int **tab, int height, int width){
+    int lin,col;
+    for (lin=0; lin < height; lin++)
+    {
+        for (col=0; col < width; col++)
+        {
+            printf("%4d",tab[lin][col]);
+        }
+        printf("\n");
+    }
+}
+void free_maze(Maze *m)
+{
+    free(m->mat_v);
+    free(m->mat_h);
+    free(m->mat_m);
+}
+
+bool check_array(int ** tab, int width, int height)
+{
+    int lin, col;
+    //printf("%d",tab[0][0]);
+    for (lin=0; lin < height; lin++)
+    {
+        for (col=0; col < width; col++)
+        {
+            //printf("%d",tab[lin][col]);
+            if(tab[lin][col] != tab[0][0])
+            {
+                return false;
+            }
+
+        }
+    }
+    return true;
+
+}
