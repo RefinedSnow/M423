@@ -15,17 +15,28 @@
 
 1447251078 d:\jennifer\cours\introprog\m423\headers\maze.h
 
-1447250599 source:d:\jennifer\documents\github\m423\main.c
+1447510312 source:d:\jennifer\documents\github\m423\main.c
 	<stdio.h>
 	<stdbool.h>
 	<stdlib.h>
-	"header/maze.h"
+	"headers/maze.h"
 
-1447259622 source:d:\jennifer\documents\github\m423\sources\maze.c
+1447510284 source:d:\jennifer\documents\github\m423\sources\maze.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	"../headers/maze.h"
 
 1447251078 d:\jennifer\documents\github\m423\headers\maze.h
+
+1447264604 source:d:\jennifer\documents\github\m423\sources\files.c
+
+1447510156 source:d:\jennifer\documents\github\m423\sources\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"../headers/menu.h"
+	"../headers/maze.h"
+
+1447265190 d:\jennifer\documents\github\m423\headers\menu.h
 

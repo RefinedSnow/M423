@@ -31,11 +31,20 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="header/maze.h" />
+		<Unit filename="headers/files.h" />
+		<Unit filename="headers/game.h" />
+		<Unit filename="headers/maze.h" />
+		<Unit filename="headers/menu.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="sources/files.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="sources/maze.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "../headers/menu.h"
+#include "../headers/maze.h"
 void init_menu()
 {
-    char c;
+   /* char c;
     system(CLEAN);
     printf("Bienvenue dans le jeu du labyrinthe ! \nVeuillez sélectionner une action à effectuer : \n\n");
     printf("1 - Créer un labyrinthe\n");
@@ -37,13 +38,12 @@ void init_menu()
         break;
     default :
         printf("Aucune action valide sélectionnée...\n");
-        break;
+        break;*/
     }
 
-    void menu_create_maze(){
+void menu_create_maze(){
     /*Lors de la création du labyrinthe, l’utilisateur pourra choisir la taille du labyrinthe (hauteur et
     largeur impaire) ainsi que son nom. Chaque labyrinthe généré est enregistré dans un fichier
     au format .cfg et est automatiquement chargé.*/
 
-    }
 }

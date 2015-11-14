@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "header/maze.h"
+#include "headers/maze.h"
 
 int main ()
 {
@@ -9,7 +9,7 @@ int main ()
 
     //init_menu();
     Maze m;
-    m = init_maze(9,9);
+    m = init_maze(5,5);
     //create_maze("coucou",&m);
     fill_maze(&m);
     view_maze(m);

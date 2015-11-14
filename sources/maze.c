@@ -99,7 +99,6 @@ void fill_maze(Maze *m)
 
 void view_maze(Maze m)
 {
-
     view_tab(m.mat_v,m.height,m.width);
     printf("\n");
     view_tab(m.mat_h,m.height,m.width);
@@ -107,13 +106,28 @@ void view_maze(Maze m)
     /*view_tab(m.mat_m,m.height,m.width);*/
 
     int lin,col;
-    for (lin=0; lin < m.height; lin++)
+    for (lin=0; lin < m.height*2; lin++)
     {
+        if(lin%2==0){
+                //0-2-4-6-8
         for (col=0; col < m.width; col++){
-                if(m.mat_v[lin][col] == 1) printf("l");
-                else if(m.mat_v[lin][col] == 0) printf(" ");
-                if(m.mat_h[lin][col] == 1) printf("_");
-                else if(m.mat_h[lin][col] == 0) printf(" ");
+            if(m.mat_h[lin/2][col]==1){
+                printf("# ");
+            }
+            else{
+                printf(" ");
+            }
+        }
+        }
+        else{
+        for (col=0; col < m.width; col++){
+                if(m.mat_v[lin/2][col]==1){
+                printf("# ");
+            }
+            else{
+                printf(" ");
+            }
+        }
         }
         printf("\n");
     }
