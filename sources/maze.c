@@ -38,33 +38,39 @@ void fill_maze(Maze *m)
 {
     int cell_val,old_cell,lin,col,cpt;
     cpt =0;
-    for(lin=0;lin<m->height;lin++){
-        for(col=0;col<m->width;col++){
+    for(lin=0; lin<m->height; lin++)
+    {
+        for(col=0; col<m->width; col++)
+        {
             m->mat_h[lin][col] = 1;
             m->mat_v[lin][col] = 1;
             m->mat_m[lin][col] = cpt;
             cpt++;
         }
     }
-    do{
+    do
+    {
         //Choses which wall to open
         int cell_x_rng = rand()%(m->width);
         int cell_y_rng = rand()%(m->height);
         int wall_type_rng = rand()%2;
         cell_val = m->mat_m[cell_y_rng][cell_x_rng];
-        if(wall_type_rng == WALL_VERTICAL && cell_x_rng < m->width-1){
+        if(wall_type_rng == WALL_VERTICAL && cell_x_rng < m->width-1)
+        {
             //the current value of the path we're about to open
             old_cell = m->mat_m[cell_y_rng][cell_x_rng+1];
             //already opened, go next
             if(m->mat_v[cell_y_rng][cell_x_rng+1] == 0) continue;
-             //if the value are the same the path is already made can't open the wall
+            //if the value are the same the path is already made can't open the wall
             if(old_cell==cell_val) continue;
             //opens the wall
             m->mat_v[cell_y_rng][cell_x_rng+1] = 0;
             m->mat_m[cell_y_rng][cell_x_rng+1] = cell_val;
             //we need to make the path
-            for(lin =0;lin<m->height;lin++){
-                for(col=0;col<m->width;col++){
+            for(lin =0; lin<m->height; lin++)
+            {
+                for(col=0; col<m->width; col++)
+                {
                     if(m->mat_m[lin][col] == old_cell)
                     {
                         m->mat_m[lin][col] = cell_val;
@@ -73,19 +79,22 @@ void fill_maze(Maze *m)
             }
 
         }
-        else if(wall_type_rng == WALL_HORIZONTAL && cell_y_rng < m->height-1){
+        else if(wall_type_rng == WALL_HORIZONTAL && cell_y_rng < m->height-1)
+        {
             //the current value of the path we're about to open
             old_cell = m->mat_m[cell_y_rng+1][cell_x_rng];
             //already opened, go next
             if(m->mat_h[cell_y_rng+1][cell_x_rng] == 0) continue;
-             //if the value are the same the path is already made can't open the wall
+            //if the value are the same the path is already made can't open the wall
             if(old_cell==cell_val) continue;
             //opens the wall
             m->mat_h[cell_y_rng+1][cell_x_rng] = 0;
             m->mat_m[cell_y_rng+1][cell_x_rng] = cell_val;
             //we need to make the path
-            for(lin =0;lin<m->height;lin++){
-                for(col=0;col<m->width;col++){
+            for(lin =0; lin<m->height; lin++)
+            {
+                for(col=0; col<m->width; col++)
+                {
                     if(m->mat_m[lin][col] == old_cell)
                     {
                         m->mat_m[lin][col] = cell_val;
@@ -94,47 +103,63 @@ void fill_maze(Maze *m)
             }
         }
 
-    }while(!check_array(m->mat_m,m->width,m->height));
+    }
+    while(!check_array(m->mat_m,m->width,m->height));
 }
 
 void view_maze(Maze m)
 {
-    view_tab(m.mat_v,m.height,m.width);
-    printf("\n");
-    view_tab(m.mat_h,m.height,m.width);
-    printf("\n");
-    /*view_tab(m.mat_m,m.height,m.width);*/
-
     int lin,col;
-    for (lin=0; lin < m.height*2; lin++)
+    for (lin=0; lin < m.height; lin++)
     {
-        if(lin%2==0){
-                //0-2-4-6-8
-        for (col=0; col < m.width; col++){
-            if(m.mat_h[lin/2][col]==1){
-                printf("# ");
+
+        //Horizontal walls
+        for (col=0; col < m.width; col++)
+        {
+            printf("#");
+            if( m.mat_h[lin][col])
+            {
+                printf(" # ");
             }
-            else{
+            else
+            {
+                printf("   ");
+            }
+
+        }
+        printf("#\n");
+        //Vertical walls
+        for (col=0; col < m.width; col++)
+        {
+            if((lin==0 && col==0)){
+                    printf(" ");
+            }
+            else if(m.mat_v[lin][col])
+            {
+                printf("#");
+            }
+            else
+            {
                 printf(" ");
             }
+            printf("   ");
         }
+        if(lin == m.height - 1){
+            printf(" \n");
+        }else{
+            printf("#\n");
         }
-        else{
-        for (col=0; col < m.width; col++){
-                if(m.mat_v[lin/2][col]==1){
-                printf("# ");
-            }
-            else{
-                printf(" ");
-            }
-        }
-        }
-        printf("\n");
+
     }
+    for (col=0; col < m.width*2+1; col++)
+        {
+            printf("# ");
+        }
 
 }
 
-void view_tab(int **tab, int height, int width){
+void view_tab(int **tab, int height, int width)
+{
     int lin,col;
     for (lin=0; lin < height; lin++)
     {

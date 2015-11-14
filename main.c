@@ -9,7 +9,7 @@ int main ()
 
     //init_menu();
     Maze m;
-    m = init_maze(5,5);
+    m = init_maze(9,9);
     //create_maze("coucou",&m);
     fill_maze(&m);
     view_maze(m);
