@@ -6,8 +6,17 @@
 int main ()
 {
     srand(time(NULL));
+    //On cree un labyrinthe vide pour commencer
     Maze m;
-    int height,width;
+    m.name = '\0';
+    m.height = NULL;
+    m.width = NULL;
+    //On place le joueur sur la premiere case
+    Player p;
+    p.posx = 0;
+    p.posy = 0;
+    m.player = p;
+    //on charge le menu avec le labyrinthe
     init_menu(&m);
     //printf("h : %d, w: %d lol",height,width);
     //m = init_maze(9,9);
@@ -15,6 +24,6 @@ int main ()
     /*fill_maze(&m);
     view_maze(m);
     free_maze(&m);*/
-
+    free_maze(&m);
     return 0;
 }

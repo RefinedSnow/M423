@@ -88,6 +88,8 @@ void load_maze(char *name,Maze *m){
         fscanf(fm,"%c",overflow);
     }
     fclose(fm);
+    m->name = name;
+
 }
 
 void fill_maze(Maze *m)
