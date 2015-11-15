@@ -32,28 +32,28 @@ void view_maze_state(Maze m)
     printf("\n x = %d y = %d\n",m.player.posx,m.player.posy);
 }
 void move_right(Maze *m){
-    int lin,col,x,y;
+    int x,y;
     x = m->player.posx;
     y = m->player.posy;
     if(x < m->width-1)
         if (m->mat_v[y][x+1] != 1)m->player.posx += 1;
 }
 void move_left(Maze *m){
-    int lin,col,x,y;
+    int x,y;
     x = m->player.posx;
     y = m->player.posy;
     if(x > 0)
         if(m->mat_v[y][x] != 1) m->player.posx -= 1;
 }
 void move_down(Maze *m){
-    int lin,col,x,y;
+    int x,y;
     x = m->player.posx;
     y = m->player.posy;
     if(y < m->height-1)
         if(m->mat_h[y+1][x] != 1) m->player.posy += 1;
 }
 void move_up(Maze *m){
-    int lin,col,x,y;
+    int x,y;
     x = m->player.posx;
     y = m->player.posy;
    if(y > 0)

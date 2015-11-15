@@ -7,6 +7,5 @@ void move_left(Maze *m);
 void move_up(Maze *m);
 void move_down(Maze *m);
 bool win(Maze m);
-void playing_loop(Maze *m);
 
 #endif // GAME_H_INCLUDED

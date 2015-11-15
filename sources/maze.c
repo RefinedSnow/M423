@@ -230,18 +230,6 @@ void view_maze(Maze m)
 
 }
 
-void view_tab(int **tab, int height, int width)
-{
-    int lin,col;
-    for (lin=0; lin < height; lin++)
-    {
-        for (col=0; col < width; col++)
-        {
-            printf("%4d",tab[lin][col]);
-        }
-        printf("\n");
-    }
-}
 void free_maze(Maze *m)
 {
     free(m->mat_v);
@@ -260,7 +248,6 @@ bool check_array(int ** tab, int width, int height)
             {
                 return false;
             }
-
         }
     }
     return true;
