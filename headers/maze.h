@@ -54,5 +54,6 @@ void view_maze(Maze m);
 void free_maze(Maze *m);
 bool check_array(int ** tab, int width, int height);
 void view_tab(int **tab, int heigt, int width);
+void load_maze(char *name,Maze *m);
 
 #endif // MAZE_H_INCLUDED

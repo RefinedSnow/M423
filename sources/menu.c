@@ -25,7 +25,7 @@ void init_menu(Maze *m)
     case '2' :
         system(CLEAN);
         printf("Chargement de labyrinthe ...\n");
-        //menu_load_maze();
+        menu_load_maze(m);
         break;
     case '3' :
         system(CLEAN);
@@ -55,18 +55,23 @@ void menu_create_maze(Maze *m){
     scanf("%d",&mheight);
     printf("Choisissez la largeur du labyrinthe : \n");
     scanf("%d",&mwidth);
-    printf("donnez un nom a votre labyrinthe : (max %d caracteres) \n",MAX_NAME_LENGTH);
+    printf("Donnez un nom a votre labyrinthe : (max %d caracteres) \n",MAX_NAME_LENGTH);
     scanf("%s",name);
+
     *m=init_maze(mheight,mwidth);
     fill_maze(m);
     create_maze(name, m);
     system(CLEAN);
-    //printf("%s\n",m->name);
     view_maze(*m);
-    //enregistrement dans un fichier,cfg
-
-    //chargement
-    //lancement de partie
     free_maze(m);
 
+}
+
+void menu_load_maze(Maze *m){
+    char name[MAX_NAME_LENGTH];
+    printf("Charger le labyrinthe : (max %d caracteres) \n",MAX_NAME_LENGTH);
+    scanf("%s",name);
+    load_maze(name,m);
+    view_maze(*m);
+    free_maze(m);
 }

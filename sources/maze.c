@@ -58,7 +58,36 @@ void create_maze(char *name, Maze *m)
         fprintf(fm,"%c",'\n');
     }
     fclose(fm);
-    printf("cpt = %d",cpt);
+}
+
+void load_maze(char *name,Maze *m){
+    FILE *fm;
+    int cpt=0,i,j;
+    char filename[MAX_NAME_LENGTH+4];
+    char overflow[1];
+
+    strcpy(filename,name);
+    strcat(filename,".cfg");
+    fm = fopen(filename,"r");
+    fscanf(fm,"%d %d\n",&m->height,&m->width);
+    *m=init_maze(m->height,m->width);
+    for(i=0;i<m->height;i++){
+        for(j=0;j<m->width;j++){
+            fscanf(fm,"%d",&m->mat_h[i][j]);
+            if(j != m->width-1) fscanf(fm,"%c",overflow);
+        }
+        fscanf(fm,"%c",overflow);
+    }
+    fscanf(fm,"%c",overflow);
+    for(i=0;i<m->height;i++){
+        for(j=0;j<m->width;j++){
+            fscanf(fm,"%d",&m->mat_v[i][j]);
+            if(j != m->width-1) fscanf(fm,"%c",overflow);
+            cpt +=2;
+        }
+        fscanf(fm,"%c",overflow);
+    }
+    fclose(fm);
 }
 
 void fill_maze(Maze *m)
