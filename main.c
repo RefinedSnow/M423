@@ -11,11 +11,6 @@ int main ()
     m.name = '\0';
     m.height = NULL;
     m.width = NULL;
-    //On place le joueur sur la premiere case
-    Player p;
-    p.posx = 0;
-    p.posy = 0;
-    m.player = p;
     //on charge le menu avec le labyrinthe
     init_menu(&m);
     //printf("h : %d, w: %d lol",height,width);

@@ -4,6 +4,7 @@
 #include <string.h>
 #include "../headers/menu.h"
 #include "../headers/maze.h"
+#include "../headers/game.h"
 void init_menu(Maze *m)
 {
     char c;
@@ -17,36 +18,37 @@ void init_menu(Maze *m)
     printf("[x] - Quitter\n");
     scanf("%c",&c);
     printf(" [%c] ",c);
-        switch(c)
-        {
-        case '1' :
-            //system(CLEAN);
-            printf("Creation de labyrinthe ...\n");
-            menu_create_maze(m);
-            break;
-        case '2' :
-            //system(CLEAN);
-            printf("Chargement de labyrinthe ...\n");
-            free_maze(m);
-            menu_load_maze(m);
-            break;
-        case '3' :
-            //system(CLEAN);
-            printf("Jeu ...\n");
-            if(m->name == NULL) printf("Aucun labyrinthe charge\n");
-            else menu_play(m);
-            break;
-        case 'x' :
-            free_maze(m);
-            printf("Sortie ...\n");
-            break;
-        default :
-            printf("Aucune action valide selectionnee...\n");
-            break;
-        }
+    switch(c)
+    {
+    case '1' :
+        //system(CLEAN);
+        printf("Creation de labyrinthe ...\n");
+        menu_create_maze(m);
+        break;
+    case '2' :
+        //system(CLEAN);
+        printf("Chargement de labyrinthe ...\n");
+        free_maze(m);
+        menu_load_maze(m);
+        break;
+    case '3' :
+        //system(CLEAN);
+        printf("Jeu ...\n");
+        if(m->name == NULL) printf("Aucun labyrinthe charge\n");
+        else menu_play(m);
+        break;
+    case 'x' :
+        free_maze(m);
+        printf("Sortie ...\n");
+        break;
+    default :
+        printf("Aucune action valide selectionnee...\n");
+        break;
+    }
 }
 
-void menu_create_maze(Maze *m){
+void menu_create_maze(Maze *m)
+{
     /*Lors de la création du labyrinthe, l’utilisateur pourra choisir la taille du labyrinthe (hauteur et
     largeur impaire) ainsi que son nom. Chaque labyrinthe généré est enregistré dans un fichier
     au format .cfg et est automatiquement chargé.*/
@@ -70,35 +72,45 @@ void menu_create_maze(Maze *m){
 
 }
 
-void menu_load_maze(Maze *m){
+void menu_load_maze(Maze *m)
+{
     char name[MAX_NAME_LENGTH];
     printf("Charger le labyrinthe : (max %d caracteres) \n",MAX_NAME_LENGTH);
     fflush(stdin);
     scanf("%s",name);
     load_maze(name,m);
-    //view_maze(*m);
-    //printf("%s",m->name);
     init_menu(m);
-    //todo : play
-    //free_maze(m);
 }
-void menu_play(Maze *m){
+void menu_play(Maze *m)
+{
     char c;
     bool end = false;
-    printf("laby : %s",m->name);
-    /*do{
+    printf("laby : %s\n",m->name);
+    view_maze_state(*m);
+    do{
+        fflush(stdin);
         scanf("%c",&c);
         switch(c){
-        case 'z' ://up
+        case 'z' : move_up(m);
+        system(CLEAN);
+        view_maze_state(*m);
             break;
-        case 'q'://left
+        case 'q': move_left(m);
+        system(CLEAN);
+        view_maze_state(*m);
             break;
-        case 's'://down
+        case 's':move_down(m);
+        system(CLEAN);
+        view_maze_state(*m);
             break;
-        case 'd'://right
+        case 'd':move_right(m);
+        system(CLEAN);
+        view_maze_state(*m);
             break;
         default: printf("saisie invalide\n");
             break;
         }
-    }while(!end);*/
+    }while(!win(*m));
+    printf("\nFelicitation vous avez reussi !\n");
+    init_menu(m);
 }
