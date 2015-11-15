@@ -12,8 +12,6 @@
 #endif
 
 #define MAX_NAME_LENGTH 20
-#define HEIGHT 9
-#define WIDTH 9
 #define WALL_VERTICAL 0
 #define WALL_HORIZONTAL 1
 /*#################################################

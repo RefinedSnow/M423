@@ -6,14 +6,15 @@
 int main ()
 {
     srand(time(NULL));
-
-    //init_menu();
     Maze m;
-    m = init_maze(9,9);
+    int height,width;
+    init_menu(&m);
+    //printf("h : %d, w: %d lol",height,width);
+    //m = init_maze(9,9);
     //create_maze("coucou",&m);
-    fill_maze(&m);
+    /*fill_maze(&m);
     view_maze(m);
-    free_maze(&m);
+    free_maze(&m);*/
 
     return 0;
 }
