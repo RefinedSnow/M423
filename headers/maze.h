@@ -12,8 +12,6 @@
 #endif
 
 #define MAX_NAME_LENGTH 20
-#define HEIGHT 9
-#define WIDTH 9
 #define WALL_VERTICAL 0
 #define WALL_HORIZONTAL 1
 /*#################################################
@@ -49,12 +47,12 @@ typedef struct
   #               FONCTIONS                       #
   #################################################
 */
-void init_menu();
 Maze init_maze(int height, int width);
 void create_maze(char *name, Maze *m);
+void fill_maze(Maze *m);
 void view_maze(Maze m);
 void free_maze(Maze *m);
 bool check_array(int ** tab, int width, int height);
-void view_tab(int **tab, int heigt, int width);
+void load_maze(char *name,Maze *m);
 
 #endif // MAZE_H_INCLUDED

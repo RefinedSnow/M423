@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "../headers/maze.h"
+
 
 Maze init_maze(int height, int width)
 {
@@ -32,6 +34,72 @@ Maze init_maze(int height, int width)
 void create_maze(char *name, Maze *m)
 {
     m->name = name;
+    FILE *fm;
+    int cpt=0,i,j;
+    char filename[MAX_NAME_LENGTH+4];
+    strcpy(filename,name);
+    strcat(filename,".cfg");
+    fm = fopen(filename,"w+");
+    cpt = fprintf(fm,"%d %d\n",m->height,m->width);
+    for(i=0; i<m->height; i++)
+    {
+        for(j=0; j<m->width; j++)
+        {
+            fprintf(fm,"%d",m->mat_h[i][j]);
+            if(j != m->width-1) fprintf(fm,"%c",' ');
+            cpt +=2;
+        }
+        fprintf(fm,"%c",'\n');
+    }
+    fprintf(fm,"%c",'\n');
+    for(i=0; i<m->height; i++)
+    {
+        for(j=0; j<m->width; j++)
+        {
+            fprintf(fm,"%d",m->mat_v[i][j]);
+            if(j != m->width-1) fprintf(fm,"%c",' ');
+            cpt +=2;
+        }
+        fprintf(fm,"%c",'\n');
+    }
+    fclose(fm);
+}
+
+void load_maze(char *name,Maze *m)
+{
+    FILE *fm;
+    int cpt=0,i,j;
+    char filename[MAX_NAME_LENGTH+4];
+    char overflow[1];
+
+    strcpy(filename,name);
+    strcat(filename,".cfg");
+    fm = fopen(filename,"r");
+    fscanf(fm,"%d %d\n",&m->height,&m->width);
+    *m=init_maze(m->height,m->width);
+    for(i=0; i<m->height; i++)
+    {
+        for(j=0; j<m->width; j++)
+        {
+            fscanf(fm,"%d",&m->mat_h[i][j]);
+            if(j != m->width-1) fscanf(fm,"%c",overflow);
+        }
+        fscanf(fm,"%c",overflow);
+    }
+    fscanf(fm,"%c",overflow);
+    for(i=0; i<m->height; i++)
+    {
+        for(j=0; j<m->width; j++)
+        {
+            fscanf(fm,"%d",&m->mat_v[i][j]);
+            if(j != m->width-1) fscanf(fm,"%c",overflow);
+            cpt +=2;
+        }
+        fscanf(fm,"%c",overflow);
+    }
+    fclose(fm);
+    m->name = name;
+
 }
 
 void fill_maze(Maze *m)
@@ -131,8 +199,9 @@ void view_maze(Maze m)
         //Vertical walls
         for (col=0; col < m.width; col++)
         {
-            if((lin==0 && col==0)){
-                    printf(" ");
+            if((lin==0 && col==0))
+            {
+                printf(" ");
             }
             else if(m.mat_v[lin][col])
             {
@@ -144,32 +213,23 @@ void view_maze(Maze m)
             }
             printf("   ");
         }
-        if(lin == m.height - 1){
+        if(lin == m.height - 1)
+        {
             printf(" \n");
-        }else{
+        }
+        else
+        {
             printf("#\n");
         }
 
     }
     for (col=0; col < m.width*2+1; col++)
-        {
-            printf("# ");
-        }
-
-}
-
-void view_tab(int **tab, int height, int width)
-{
-    int lin,col;
-    for (lin=0; lin < height; lin++)
     {
-        for (col=0; col < width; col++)
-        {
-            printf("%4d",tab[lin][col]);
-        }
-        printf("\n");
+        printf("# ");
     }
+
 }
+
 void free_maze(Maze *m)
 {
     free(m->mat_v);
@@ -180,17 +240,14 @@ void free_maze(Maze *m)
 bool check_array(int ** tab, int width, int height)
 {
     int lin, col;
-    //printf("%d",tab[0][0]);
     for (lin=0; lin < height; lin++)
     {
         for (col=0; col < width; col++)
         {
-            //printf("%d",tab[lin][col]);
             if(tab[lin][col] != tab[0][0])
             {
                 return false;
             }
-
         }
     }
     return true;

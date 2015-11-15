@@ -1,6 +1,0 @@
-#ifndef FILES_H_INCLUDED
-#define FILES_H_INCLUDED
-
-
-
-#endif // FILES_H_INCLUDED
