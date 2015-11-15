@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "../headers/menu.h"
 #include "../headers/maze.h"
 void init_menu(Maze *m)
@@ -46,16 +47,26 @@ void menu_create_maze(Maze *m){
     /*Lors de la création du labyrinthe, l’utilisateur pourra choisir la taille du labyrinthe (hauteur et
     largeur impaire) ainsi que son nom. Chaque labyrinthe généré est enregistré dans un fichier
     au format .cfg et est automatiquement chargé.*/
-    int mheight;
-    int mwidth;
+    int mheight, mwidth,i,j;
+    char name[MAX_NAME_LENGTH];
+    int cpt = 0;
+
     printf("Choisissez la hauteur du labyrinthe : \n");
     scanf("%d",&mheight);
     printf("Choisissez la largeur du labyrinthe : \n");
     scanf("%d",&mwidth);
+    printf("donnez un nom a votre labyrinthe : (max %d caracteres) \n",MAX_NAME_LENGTH);
+    scanf("%s",name);
     *m=init_maze(mheight,mwidth);
     fill_maze(m);
+    create_maze(name, m);
     system(CLEAN);
+    //printf("%s\n",m->name);
     view_maze(*m);
+    //enregistrement dans un fichier,cfg
+
+    //chargement
+    //lancement de partie
     free_maze(m);
 
 }

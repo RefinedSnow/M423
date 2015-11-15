@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "../headers/maze.h"
 
 Maze init_maze(int height, int width)
@@ -32,6 +33,32 @@ Maze init_maze(int height, int width)
 void create_maze(char *name, Maze *m)
 {
     m->name = name;
+    FILE *fm;
+    int cpt=0,i,j;
+    char filename[MAX_NAME_LENGTH+4];
+    strcpy(filename,name);
+    strcat(filename,".cfg");
+    fm = fopen(filename,"w+");
+    cpt = fprintf(fm,"%d %d\n",m->height,m->width);
+    for(i=0;i<m->height;i++){
+        for(j=0;j<m->width;j++){
+            fprintf(fm,"%d",m->mat_h[i][j]);
+            if(j != m->width-1) fprintf(fm,"%c",' ');
+            cpt +=2;
+        }
+        fprintf(fm,"%c",'\n');
+    }
+    fprintf(fm,"%c",'\n');
+    for(i=0;i<m->height;i++){
+        for(j=0;j<m->width;j++){
+            fprintf(fm,"%d",m->mat_v[i][j]);
+            if(j != m->width-1) fprintf(fm,"%c",' ');
+            cpt +=2;
+        }
+        fprintf(fm,"%c",'\n');
+    }
+    fclose(fm);
+    printf("cpt = %d",cpt);
 }
 
 void fill_maze(Maze *m)
