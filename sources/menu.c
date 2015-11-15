@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "../headers/menu.h"
 #include "../headers/maze.h"
+#include "../headers/menu.h"
 #include "../headers/game.h"
 void init_menu(Maze *m)
 {
@@ -43,6 +43,7 @@ void init_menu(Maze *m)
         break;
     default :
         printf("Aucune action valide selectionnee...\n");
+        init_menu(m);
         break;
     }
 }

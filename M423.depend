@@ -32,17 +32,16 @@
 
 1447597880 source:d:\jennifer\documents\github\m423\sources\files.c
 
-1447616895 source:d:\jennifer\documents\github\m423\sources\menu.c
+1447624189 source:d:\jennifer\documents\github\m423\sources\menu.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	<string.h>
-	"../headers/menu.h"
 	"../headers/maze.h"
+	"../headers/menu.h"
 	"../headers/game.h"
 
-1447606711 d:\jennifer\documents\github\m423\headers\menu.h
-	"maze.h"
+1447624100 d:\jennifer\documents\github\m423\headers\menu.h
 
 1447621146 source:d:\jennifer\documents\github\m423\sources\game.c
 	<stdio.h>
@@ -52,4 +51,10 @@
 	"../headers/maze.h"
 
 1447616423 d:\jennifer\documents\github\m423\headers\game.h
+
+1447624059 source:d:\jennifer\documents\github\m423\sources\main.c
+	<stdio.h>
+	<stdbool.h>
+	<stdlib.h>
+	"../headers/maze.h"
 
